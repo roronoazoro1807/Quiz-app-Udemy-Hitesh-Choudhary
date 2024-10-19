@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  </head>
+  <body class="bg-gray-900 text-white flex justify-center items-center min-h-screen">
+    <div class="container bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md text-center">
+      <h1 class="text-4xl font-bold mb-8">Quiz App</h1>
+      <div id="quiz-container">
+        
+        <div id="question-container" class="hidden">
+          <h2 id="question-text" class="text-2xl font-semibold mb-6"></h2>
+          <ul id="choices-list" class="space-y-4">
+          
+          </ul>
+          <button id="next-btn" class="hidden bg-blue-600 text-white px-6 py-2 rounded-lg mt-6 hover:bg-blue-500 transition-colors">
+            Next Question
+          </button>
+        </div>
+
+        <div id="result-container" class="hidden">
+          <h2 class="text-3xl font-bold mb-4">Your Score:</h2>
+          <p id="score" class="text-xl font-medium mb-6"></p>
+          <button id="restart-btn" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-500 transition-colors">
+            Restart Quiz
+          </button>
+        </div>
+
+       
+        <button id="start-btn" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-500 transition-colors">
+          Start Quiz
+        </button>
+      </div>
+    </div>
+
+    <script>
+     
+      document.addEventListener("DOMContentLoaded", () => {
+        const startBtn = document.getElementById('start-btn');
+        const questionContainer = document.getElementById('question-container');
+        const resultContainer = document.getElementById('result-container');
+        
+        gsap.from(".container", { duration: 1, opacity: 0, y: -50, ease: "power2.out" });
+
+        startBtn.addEventListener("click", () => {
+          gsap.to(startBtn, { opacity: 0, y: 30, duration: 0.5, ease: "power1.out", onComplete: () => {
+            startBtn.classList.add("hidden");
+            questionContainer.classList.remove("hidden");
+            gsap.from("#question-container", { duration: 0.5, opacity: 0, y: 30, ease: "power2.out" });
+          }});
+        });
+
+        
+      });
+    </script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
